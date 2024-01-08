@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     def buildNumber = env.BUILD_NUMBER
-                    def outputDir = "/var/lib/jenkins/jobs/pipeline-1/builds/${currentBuild.number}"
+                    def outputDir = "/var/lib/jenkins/jobs/Inference_Demo/builds/${currentBuild.number}"
 
                     // Check if the directory exists
                     if (fileExists(outputDir)) {
@@ -50,7 +50,7 @@ pipeline {
 	stage('Upload to S3') {
             steps {
                 script {
-                    def outputDir = "/var/lib/jenkins/workspace/pipeline-1"
+                    def outputDir = "/var/lib/jenkins/workspace/Inference_Demo"
 		    sh "aws s3 cp ${outputDir}/output.tar.gz s3://mcw-pipeline/Artifacts/"
 
                 }
