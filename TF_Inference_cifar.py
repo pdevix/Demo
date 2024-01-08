@@ -1,4 +1,4 @@
-import tensorflow-cpu as tf
+import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 
 #Download and Prepare Cifar dataset
@@ -27,7 +27,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 #Training the model
-history = model.fit(train_images, train_labels, epochs=10, 
+history = model.fit(train_images, train_labels, epochs=2, 
                     validation_data=(test_images, test_labels))
 
 #Evaluate
