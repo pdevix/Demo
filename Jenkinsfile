@@ -47,5 +47,14 @@ pipeline {
                 }
             }
         }
+        stage('Upload to S3') {
+            steps {
+                script {
+                    def outputDir = "/var/lib/jenkins/workspace/Inference_Demo"
+                    sh "aws s3 cp ${outputDir}/output.tar.gz s3://mcw-output/Artifacts/"
+
+                }
+            }
+        }
 }
 }
