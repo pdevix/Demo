@@ -31,30 +31,5 @@ pipeline {
                 archiveArtifacts artifacts: '*'
             }
         }
-	stage('Create Tar File') {
-            steps {
-                script {
-                    def buildNumber = env.BUILD_NUMBER
-                    def outputDir = "/var/lib/jenkins/jobs/Inference_Demo/builds/${currentBuild.number}"
-
-                    // Check if the directory exists
-                    if (fileExists(outputDir)) {
-                        // Create a tar file
-                        sh "sleep 5 && tar -czvf output.tar.gz --exclude='*.tmp' --ignore-failed-read -C ${outputDir} ."
-                    } else {
-                        error "Output directory not found: ${outputDir}"
-                    }
-                }
-            }
-        }
-	stage('Upload to S3') {
-            steps {
-                script {
-                    def outputDir = "/var/lib/jenkins/workspace/Inference_Demo"
-		    sh "aws s3 cp ${outputDir}/output.tar.gz s3://mcw-output/Artifacts/"
-
-                }
-            }
-        }
 }
 }
